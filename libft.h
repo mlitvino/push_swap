@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:12:08 by mlitvino          #+#    #+#             */
-/*   Updated: 2024/11/08 13:50:55 by mlitvino         ###   ########.fr       */
+/*   Updated: 2024/12/09 14:06:33 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
+# include <stdarg.h>
+# include <stdint.h>
 
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+int		ft_isspace(int a);
 int		ft_isalpha(int a);
 int		ft_isdigit(int a);
 int		ft_isalnum(int a);
@@ -54,14 +59,37 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
+t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+int	ft_printf(const char *format, ...);
+int	ft_putchar(int a);
+int	ft_putstr(char *str);
+int	ft_putptr(void *ptr);
+int	ft_putu(unsigned int n);
+int	ft_putint(int n, char spec);
+int	ft_puthex(int n, char spec);
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+char	*get_next_line(int fd);
+char	*ft_realloc_buf(char *buffer, int *new_size);
+int		ft_strchr_buf(char *buffer, int *buf_len);
+char	*ft_sub_buf(char *buffer, int *buf_len, char ***buf_tab, int tab_len);
+int		ft_strlen_buf(char *buffer);
+void	ft_bzero_buf(char *buffer, int size);
+char	*free_buf(char ***buf_tab, int buf_len);
+char	**ft_init_buf(char **buf_tab, int *buf_len);
+char	*ft_read(char ***buf_tab, int fd, int tab_len, int *buf_len);
+char	**ft_realloc_buf_tab(char **old_tab, int *old_size, int new_size);
 
 #endif
