@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:42:29 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/02/20 16:48:23 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:28:15 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ long	ft_atol(const char *str)
 	{
 		temp = res;
 		if (temp > INT_MAX || temp < INT_MIN)
-			return (temp);
+			return ((long)INT_MAX + 1);
 		res = res * 10 + (*str++ - '0');
 	}
+	while (ft_isspace(*str))
+		str++;
 	if (*str)
 		return ((long)INT_MAX + 1);
 	return (res * sign);

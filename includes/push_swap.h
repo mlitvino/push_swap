@@ -6,19 +6,13 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:16:56 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/02/20 16:48:03 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:47:07 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libft.h"
-
-typedef struct s_nbr
-{
-	int	nbr;
-	int	rank;
-}		t_nbr;
 
 typedef struct s_stack
 {
@@ -27,12 +21,37 @@ typedef struct s_stack
 	struct s_stack	*prev;
 }					t_stack;
 
+typedef struct s_nbr
+{
+	int	nbr;
+	int	org_pos;
+	int	rank;
+}	t_nbr;
+
 typedef struct s_data
 {
-	t_stack	a;
-	t_stack	b;
+	t_stack	**a;
+	t_stack	**b;
 	t_list	opers;
+
+
+	int		*arr;
+	int		i;
+	int		j;
+
+	int		stk_size;
+
+	t_nbr *nbr;
 }	t_data;
+
+typedef struct s_quick_vars
+{
+	int	i;
+	int	j;
+	int	mid;
+	int	pivot;
+} 		t_quick_vars;
+
 
 int			push_swap(int argc, char *argv[]);
 t_stack		*check_insert(int i, int argc, char *argv[], t_stack **a);

@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:16:43 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/02/20 16:09:59 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:43:32 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,42 @@
 
 int	push_swap(int argc, char *argv[])
 {
-	t_stack	*a;
-	t_stack	*b;
 
-	b = NULL;
+	(void)argc;
+	(void)argv;
+	// t_stack	*a;
+	// t_stack	*b;
+
+	// b = NULL;
 
 
-	// prints everything // test
-	ft_printf("start\n");
-	t_stack *t = a;
+	// // prints everything // test
+	// ft_printf("start\n");
+	// t_stack *t = a;
 
-	while (t)
-	{
-		ft_printf("%d\n", t->nbr);
-		t = t->next;
-	}
+	// while (t)
+	// {
+	// 	ft_printf("%d\n", t->nbr);
+	// 	t = t->next;
+	// }
 
-	push(&a, &b);
-	swap(&a);
+	// push(&a, &b);
+	// swap(&a);
 
-	t = a;
-	ft_printf("after push+swap a:\n");
-	while (t)
-	{
-		ft_printf("%d\n", t->nbr);
-		t = t->next;
-	}
+	// t = a;
+	// ft_printf("after push+swap a:\n");
+	// while (t)
+	// {
+	// 	ft_printf("%d\n", t->nbr);
+	// 	t = t->next;
+	// }
 
-	ft_printf("b:\n");
-	while (b)
-	{
-		ft_printf("%d\n", b->nbr);
-		b = b->next;
-	}
+	// ft_printf("b:\n");
+	// while (b)
+	// {
+	// 	ft_printf("%d\n", b->nbr);
+	// 	b = b->next;
+	// }
 
 
 	// rotate(&a);

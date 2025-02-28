@@ -6,7 +6,7 @@
 #    By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/20 13:22:45 by mlitvino          #+#    #+#              #
-#    Updated: 2025/02/20 14:39:53 by mlitvino         ###   ########.fr        #
+#    Updated: 2025/02/28 13:03:31 by mlitvino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,21 +22,20 @@ LIBFT_DIR = ./libft
 INCLD_DIR = ./includes
 
 SRC = \
-	checks.c ft_sort.c main.c operations_1.c operations_2.c \
-	operations_3.c push_swap.c stk_alloc.c stk_manip.c utils.c
+	checks.c ft_sort.c main.c stk_ops1.c stk_ops2.c \
+	stk_ops3.c push_swap.c stk_alloc.c stk_manip.c utils.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
-SRCS =  $(addprefix $(SRC_DIR)/, $(SRC))
 INCLD = $(INCLD_DIR)/push_swap.h
 
 .SECONDARY: $(OBJ)
 
-all: $(LIBFT) $(NAME)
+all: $(LIBFT) $(NAME) delete_obj_dir
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLD)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
@@ -55,6 +54,11 @@ fclean: clean
 	rm -f $(NAME)
 	make -C $(LIBFT_DIR) fclean
 
+delete_obj_dir:
+	@if [ -z "$$(ls -A $(OBJ_DIR))" ]; then \
+	rm -rf $(OBJ_DIR); \
+	fi
+
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re delete_obj_dir
