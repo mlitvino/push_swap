@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:58:06 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/02/28 12:43:58 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/02 03:27:43 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,9 @@ int	ft_isspace(int c)
 		|| c == '\v' || c == '\f' || c == '\r');
 }
 
-void	free_data(t_data *data)
-{
-	stkclear(data->a);
-	stkclear(data->b);
-}
-
 void	print_error(char *message)
 {
 	//free_data(data);
 	ft_putendl_fd(message, 2);
 	exit(1);
-}
-
-void	is_sorted()
-{
-
 }

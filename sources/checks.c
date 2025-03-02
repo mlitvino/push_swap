@@ -6,13 +6,13 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:42:29 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/02/28 13:28:15 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/02 03:28:00 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long	ft_atol(const char *str)
+long	safe_atoi(const char *str)
 {
 	int			res;
 	int			sign;
@@ -41,42 +41,81 @@ long	ft_atol(const char *str)
 	return (res * sign);
 }
 
-void	check_dupl(t_stack **a, int i, int nbr)
+void	is_sorted(t_stack *a)
 {
-	int			j;
-	t_stack		*temp;
+	int	temp;
 
-	j = 1;
-	temp = *a;
-	while (temp && j < i)
+	temp = a->nbr;
+	while (a->next)
 	{
-		if (nbr == temp->nbr)
+		a = a->next;
+		if (temp >= a->nbr)
+			return ;
+		temp = a->nbr;
+	}
+	stkclear(a);
+	exit(0);
+}
+
+void	check_dupls(int *arr, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		if (arr[i] == arr[i + 1])
 		{
-			stkclear(a);
-			print_error("Error: argument contains duplicate");
+			print_error("Error: input contains a duplicate");
 		}
-		temp = temp->next;
+		i++;
 	}
 }
 
-t_stack	*check_insert(int i, int argc, char *argv[], t_stack **a)
+void	convert_ranks(t_stack *a, int *arr, int size)
 {
-	long int	nbr;
+	int		i;
+	t_stack	*temp;
 
-	if (i == argc)
-		return (*a);
-	nbr = ft_atol(argv[i]);
-	if (INT_MIN > nbr || nbr > INT_MAX)
+	i = 0;
+	while (i < size)
+	{
+		temp = a;
+		while (temp)
+		{
+			if (temp->nbr == arr[i])
+			{
+				temp->nbr = i;
+				break ;
+			}
+			temp = temp->next;
+		}
+		i++;
+	}
+}
+
+void	check_prepare_stack(t_stack *a, int size)
+{
+	t_stack	*temp;
+	int		*copy;
+	int		i;
+
+	is_sorted(a);
+	copy = malloc(sizeof(int) * size);
+	if (!copy)
 	{
 		stkclear(a);
-		print_error("Error: argument is not an integer");
+		print_error("Error: malloc failed in check_prepare_stack");
 	}
-	check_dupl(a, i, nbr);
-	if (i == 1)
-		*a = stknew(nbr);
-	else if (*a)
-		stkadd_back(a, stknew(nbr));
-	if (!a)
-		return (stkclear(a), NULL);
-	return (check_insert(i + 1, argc, argv, a));
+	i = 0;
+	temp = a;
+	while (i < size)
+	{
+		copy[i] = temp->nbr;
+		temp = temp->next;
+		i++;
+	}
+	quicksort(copy, 0, size - 1);
+	check_dupls(copy, size);
+	convert_ranks(a, copy, size);
 }

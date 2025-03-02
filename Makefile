@@ -6,12 +6,13 @@
 #    By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/20 13:22:45 by mlitvino          #+#    #+#              #
-#    Updated: 2025/02/28 13:03:31 by mlitvino         ###   ########.fr        #
+#    Updated: 2025/03/02 03:20:34 by mlitvino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I$(INCLD_DIR) -I$(LIBFT_DIR)/includes
+CFLAGS = -I$(INCLD_DIR) -I$(LIBFT_DIR)/includes
+# -Wall -Wextra -Werror
 
 NAME = push_swap
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -23,7 +24,8 @@ INCLD_DIR = ./includes
 
 SRC = \
 	checks.c ft_sort.c main.c stk_ops1.c stk_ops2.c \
-	stk_ops3.c push_swap.c stk_alloc.c stk_manip.c utils.c
+	stk_ops3.c push_swap.c stk_alloc.c stk_manip.c utils.c \
+	sort_arr.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 INCLD = $(INCLD_DIR)/push_swap.h

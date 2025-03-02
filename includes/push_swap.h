@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:16:56 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/02/28 16:47:07 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/02 03:25:43 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,14 @@ typedef struct s_stack
 {
 	int				nbr;
 	struct s_stack	*next;
-	struct s_stack	*prev;
 }					t_stack;
-
-typedef struct s_nbr
-{
-	int	nbr;
-	int	org_pos;
-	int	rank;
-}	t_nbr;
 
 typedef struct s_data
 {
-	t_stack	**a;
-	t_stack	**b;
-	t_list	opers;
-
-
-	int		*arr;
-	int		i;
-	int		j;
-
+	t_stack	*a;
+	t_stack	*b;
 	int		stk_size;
-
-	t_nbr *nbr;
-}	t_data;
+}			t_data;
 
 typedef struct s_quick_vars
 {
@@ -50,12 +33,21 @@ typedef struct s_quick_vars
 	int	j;
 	int	mid;
 	int	pivot;
-} 		t_quick_vars;
+}		t_quick_vars;
 
+//sort_arr.c
+void		int_swap(int *a, int *b);
+void		partition(int *arr, t_quick_vars *vars, int left, int right);
+void		quicksort(int *arr, int left, int right);
+
+void		check_get_input(int argc, char *argv[], t_data *data);
+void		check_prepare_stack(t_stack *a, int size);
+
+//void	is_sorted(int *arr, int n);
 
 int			push_swap(int argc, char *argv[]);
 t_stack		*check_insert(int i, int argc, char *argv[], t_stack **a);
-long	ft_atol(const char *str);
+long		safe_atoi(const char *str);
 
 //ops1
 void		sa(t_stack **a);
@@ -75,10 +67,10 @@ void		rrb(t_stack **b);
 void		rrr(t_stack **a, t_stack **b);
 
 //stk_alloc.c
-void		stkclear(t_stack **stk);
+void		stkclear(t_stack *stk);
 t_stack		*stknew(int nbr);
-t_stack		*check_insert(int i, int argc, char *argv[], t_stack **a);
-t_stack		*stkadd_back(t_stack **a, t_stack *new);
+// t_stack		*check_insert(int i, int argc, char *argv[], t_stack **a);
+t_stack		*stkadd_back(t_stack *a, t_stack *new);
 
 //stk_manip.c
 void		push(t_stack **from, t_stack **to);

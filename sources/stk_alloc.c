@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:18:25 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/02/20 16:47:48 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/02 00:27:39 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,31 @@ t_stack	*stknew(int nbr)
 	return (stknew);
 }
 
-void	stkclear(t_stack **stk)
+void	stkclear(t_stack *stk)
 {
 	t_stack	*temp;
 
-	if (*stk == NULL || stk == NULL)
+	if (stk == NULL)
 		return ;
-	while (*stk != NULL)
+	while (stk)
 	{
-		temp = (*stk)->next;
-		free(*stk);
-		*stk = temp;
+		temp = stk->next;
+		free(stk);
+		stk = temp;
 	}
-	*stk = NULL;
 }
 
-t_stack	*stkadd_back(t_stack **a, t_stack *new)
+t_stack	*stkadd_back(t_stack *a, t_stack *new)
 {
 	t_stack	*temp;
 
-	if (new == NULL)
-		return (NULL);
-	if (*a == NULL)
-	{
-		*a = new;
-		return (NULL);
-	}
-	temp = *a;
-	while (temp->next != NULL)
+	if (!new)
+		return (stkclear(a), NULL);
+	if (!a)
+		return (new);
+	temp = a;
+	while (temp->next)
 		temp = temp->next;
 	temp->next = new;
-	return (new);
+	return (a);
 }
