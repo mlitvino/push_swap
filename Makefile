@@ -6,7 +6,7 @@
 #    By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/20 13:22:45 by mlitvino          #+#    #+#              #
-#    Updated: 2025/03/02 03:20:34 by mlitvino         ###   ########.fr        #
+#    Updated: 2025/03/02 21:24:58 by mlitvino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,10 @@ LIBFT_DIR = ./libft
 INCLD_DIR = ./includes
 
 SRC = \
-	checks.c ft_sort.c main.c stk_ops1.c stk_ops2.c \
-	stk_ops3.c push_swap.c stk_alloc.c stk_manip.c utils.c \
-	sort_arr.c
+	checks.c main.c \
+	stk_ops1.c stk_ops2.c stk_ops3.c \
+	stk_alloc.c stk_manip.c utils.c \
+	quicksort.c radix.c
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 INCLD = $(INCLD_DIR)/push_swap.h

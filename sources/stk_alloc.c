@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:18:25 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/03/02 00:27:39 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/03 00:46:46 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	stkclear(t_stack *stk)
 {
 	t_stack	*temp;
 
-	if (stk == NULL)
-		return ;
 	while (stk)
 	{
 		temp = stk->next;

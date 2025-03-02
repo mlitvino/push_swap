@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:18:12 by mlitvino          #+#    #+#             */
-/*   Updated: 2024/12/13 16:44:09 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/03 01:07:22 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,35 @@ void	swap(t_stack **stack)
 	*stack = temp;
 }
 
-void	push(t_stack **from, t_stack **to)
+void push(t_stack **from, t_stack **to)
 {
-	t_stack	*temp;
+    if (!*from)
+        return;
 
-	if (!from || !*from)
-		return ;
-	temp = *from;
-	*from = (*from)->next;
-	temp->next = *to;
-	*to = temp;
+    // remove the first node from '*from'
+    t_stack *temp = *from;
+    *from = (*from)->next;
+
+    // push that node onto '*to'
+    temp->next = *to;
+    *to = temp;
 }
 
-void	rotate(t_stack **stack)
+void rotate(t_stack **stack)
 {
-	t_stack	*end;
+    t_stack *head = *stack;
+    if (!head || !head->next)
+        return; // 0 or 1 node, no rotate needed
 
-	end = *stack;
-	while (end->next)
-		end = end->next;
-	end->next = (*stack);
-	(*stack) = (*stack)->next;
-	end->next->next = NULL;
+    // find the last node
+    t_stack *end = head;
+    while (end->next)
+        end = end->next;
+
+    // move the first node to the end
+    *stack = head->next;   // new head
+    end->next = head;      // old head becomes last
+    head->next = NULL;     // old head next is null
 }
 
 void	rev_rotate(t_stack **stack)

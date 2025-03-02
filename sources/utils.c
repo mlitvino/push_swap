@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:58:06 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/03/02 03:27:43 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/03 00:50:38 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	ft_isspace(int c)
 
 void	print_error(char *message)
 {
-	//free_data(data);
 	ft_putendl_fd(message, 2);
 	exit(1);
 }

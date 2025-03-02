@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:42:29 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/03/02 03:28:00 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/03 01:13:12 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,17 @@ long	safe_atoi(const char *str)
 
 void	is_sorted(t_stack *a)
 {
-	int	temp;
+	int		num;
+	t_stack	*temp;
 
-	temp = a->nbr;
-	while (a->next)
+	temp = a;
+	num = temp->nbr;
+	while (temp->next)
 	{
-		a = a->next;
-		if (temp >= a->nbr)
+		temp = temp->next;
+		if (num >= temp->nbr)
 			return ;
-		temp = a->nbr;
+		num = temp->nbr;
 	}
 	stkclear(a);
 	exit(0);
@@ -76,25 +78,26 @@ void	convert_ranks(t_stack *a, int *arr, int size)
 {
 	int		i;
 	t_stack	*temp;
+	int		org;
 
-	i = 0;
-	while (i < size)
+	temp = a;
+	while (temp)
 	{
-		temp = a;
-		while (temp)
+		i = 0;
+		while (i < size)
 		{
-			if (temp->nbr == arr[i])
+			if (arr[i] == temp->nbr)
 			{
 				temp->nbr = i;
-				break ;
+				break;
 			}
-			temp = temp->next;
+			i++;
 		}
-		i++;
+		temp = temp->next;
 	}
 }
 
-void	check_prepare_stack(t_stack *a, int size)
+t_stack	*chck_prepare_stck(t_stack *a, int size)
 {
 	t_stack	*temp;
 	int		*copy;
@@ -105,7 +108,7 @@ void	check_prepare_stack(t_stack *a, int size)
 	if (!copy)
 	{
 		stkclear(a);
-		print_error("Error: malloc failed in check_prepare_stack");
+		print_error("Error: malloc failed in chck_prepare_stck");
 	}
 	i = 0;
 	temp = a;
@@ -118,4 +121,6 @@ void	check_prepare_stack(t_stack *a, int size)
 	quicksort(copy, 0, size - 1);
 	check_dupls(copy, size);
 	convert_ranks(a, copy, size);
+	free(copy);
+	return (a);
 }
