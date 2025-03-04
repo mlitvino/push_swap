@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:42:29 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/03/03 01:13:12 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/04 00:48:25 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	is_sorted(t_stack *a)
 	exit(0);
 }
 
-void	check_dupls(int *arr, int size)
+void	check_dupls(int *arr, int size, t_stack *a)
 {
 	int	i;
 
@@ -68,7 +68,9 @@ void	check_dupls(int *arr, int size)
 	{
 		if (arr[i] == arr[i + 1])
 		{
-			print_error("Error: input contains a duplicate");
+			free(arr);
+			stkclear(a);
+			print_error("Error");
 		}
 		i++;
 	}
@@ -89,7 +91,7 @@ void	convert_ranks(t_stack *a, int *arr, int size)
 			if (arr[i] == temp->nbr)
 			{
 				temp->nbr = i;
-				break;
+				break ;
 			}
 			i++;
 		}
@@ -108,7 +110,7 @@ t_stack	*chck_prepare_stck(t_stack *a, int size)
 	if (!copy)
 	{
 		stkclear(a);
-		print_error("Error: malloc failed in chck_prepare_stck");
+		print_error("Error");
 	}
 	i = 0;
 	temp = a;
@@ -119,7 +121,7 @@ t_stack	*chck_prepare_stck(t_stack *a, int size)
 		i++;
 	}
 	quicksort(copy, 0, size - 1);
-	check_dupls(copy, size);
+	check_dupls(copy, size, a);
 	convert_ranks(a, copy, size);
 	free(copy);
 	return (a);

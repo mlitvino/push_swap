@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:16:56 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/03/03 01:09:32 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/04 00:48:16 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_data
 {
 	t_stack	*a;
 	t_stack	*b;
-	int		size;
+	char	***tab;
 }			t_data;
 
 typedef struct s_quick_vars
@@ -43,8 +43,8 @@ void		quicksort(int *arr, int left, int right);
 void		check_get_input(int argc, char *argv[], t_data *data);
 t_stack		*chck_prepare_stck(t_stack *a, int size);
 
-void	p(t_stack *a);
-void	radix(t_stack **a, t_stack **b, int size);
+void		p(t_stack *a);
+void		radix(t_stack **a, t_stack **b, int size);
 
 //void	is_sorted(int *arr, int n);
 
