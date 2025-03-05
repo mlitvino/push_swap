@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 15:18:12 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/03/04 01:45:27 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/05 12:59:07 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,49 +22,52 @@ void	swap(t_stack **stack)
 	*stack = temp;
 }
 
-void	push(t_stack **from, t_stack **to)
+int	push(t_stack **from, t_stack **to)
 {
 	t_stack	*temp;
 
 	if (!*from)
-		return ;
+		return (0);
 	temp = *from;
 	*from = (*from)->next;
 	temp->next = *to;
 	*to = temp;
+	return (1);
 }
 
-void	rotate(t_stack **stack)
+int	rotate(t_stack **stack)
 {
 	t_stack	*end;
-    t_stack *head;
+	t_stack	*head;
 
-    if (!*stack || !((*stack)->next))
-        return ;
+	if (!*stack || !((*stack)->next))
+		return (0);
 	end = *stack;
 	while (end->next)
 		end = end->next;
-    head = *stack;
-    *stack = head->next;
-    end->next = head;
-    head->next = NULL;
+	head = *stack;
+	*stack = head->next;
+	end->next = head;
+	head->next = NULL;
+	return (1);
 }
 
-void	rev_rotate(t_stack **stack)
+int	rev_rotate(t_stack **stack)
 {
 	t_stack	*start;
 	t_stack	*end;
 
 	if (!stack || !*stack || !((*stack)->next))
-        return ;
-    start = NULL;
+		return (0);
+	start = NULL;
 	end = *stack;
 	while (end->next)
-    {
-        start = end;
+	{
+		start = end;
 		end = end->next;
-    }
+	}
 	start->next = NULL;
-    end->next = *stack;
-    *stack = end;
+	end->next = *stack;
+	*stack = end;
+	return (1);
 }

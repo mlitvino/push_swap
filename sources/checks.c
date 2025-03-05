@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:42:29 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/03/04 00:48:25 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:01:36 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 long	safe_atoi(const char *str)
 {
-	int			res;
+	long		res;
 	int			sign;
-	long		temp;
 
 	res = 0;
 	sign = 1;
@@ -27,12 +26,13 @@ long	safe_atoi(const char *str)
 	if (*str == '+' || *str == '-')
 		if (*str++ == '-')
 			sign *= -1;
+	if (!(*str >= '0' && *str <= '9'))
+		return ((long)INT_MAX + 1);
 	while (*str >= '0' && *str <= '9')
 	{
-		temp = res;
-		if (temp > INT_MAX || temp < INT_MIN)
-			return ((long)INT_MAX + 1);
 		res = res * 10 + (*str++ - '0');
+		if (res > INT_MAX || res < INT_MIN)
+			return ((long)INT_MAX + 1);
 	}
 	while (ft_isspace(*str))
 		str++;
@@ -69,8 +69,7 @@ void	check_dupls(int *arr, int size, t_stack *a)
 		if (arr[i] == arr[i + 1])
 		{
 			free(arr);
-			stkclear(a);
-			print_error("Error");
+			print_error(a, "Error");
 		}
 		i++;
 	}
@@ -80,7 +79,6 @@ void	convert_ranks(t_stack *a, int *arr, int size)
 {
 	int		i;
 	t_stack	*temp;
-	int		org;
 
 	temp = a;
 	while (temp)
@@ -108,10 +106,7 @@ t_stack	*chck_prepare_stck(t_stack *a, int size)
 	is_sorted(a);
 	copy = malloc(sizeof(int) * size);
 	if (!copy)
-	{
-		stkclear(a);
-		print_error("Error");
-	}
+		print_error(a, "Error");
 	i = 0;
 	temp = a;
 	while (i < size)

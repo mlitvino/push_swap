@@ -6,7 +6,7 @@
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:16:43 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/03/04 00:48:57 by mlitvino         ###   ########.fr       */
+/*   Updated: 2025/03/05 12:59:24 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	radix(t_stack **a, t_stack **b, int size)
 	int	temp;
 
 	max_bits = 0;
-	while ((size - 1 >> max_bits) != 0)
+	while (((size - 1) >> max_bits) != 0)
 		max_bits++;
 	i = 0;
 	while (i < max_bits)
@@ -29,7 +29,7 @@ void	radix(t_stack **a, t_stack **b, int size)
 		while (j < size)
 		{
 			temp = (*a)->nbr;
-			if ( (temp >> i) & 1 == 1)
+			if (((temp >> i) & 1) == 1)
 				ra(a);
 			else
 				pb(a, b);

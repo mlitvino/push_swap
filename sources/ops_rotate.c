@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stk_ops1.c                                         :+:      :+:    :+:   */
+/*   stk_ops3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlitvino <mlitvino@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 15:16:44 by mlitvino          #+#    #+#             */
-/*   Updated: 2025/03/04 00:51:27 by mlitvino         ###   ########.fr       */
+/*   Created: 2024/12/13 11:20:28 by mlitvino          #+#    #+#             */
+/*   Updated: 2025/03/04 17:49:26 by mlitvino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_stack **a)
+void	rra(t_stack **a)
 {
-	swap(a);
-	ft_printf("sa\n");
+	if (rev_rotate(a))
+		ft_printf("rra\n");
 }
 
-void	sb(t_stack **b)
+void	rrb(t_stack **b)
 {
-	swap(b);
-	ft_printf("sa\n");
+	if (rev_rotate(b))
+		ft_printf("rrb\n");
 }
 
-void	ss(t_stack **a, t_stack **b)
+void	ra(t_stack **a)
 {
-	swap(a);
-	swap(b);
-	ft_printf("ss\n");
+	if (rotate(a))
+		ft_printf("ra\n");
 }
 
-void	pa(t_stack **b, t_stack **a)
+void	rb(t_stack **b)
 {
-	push(b, a);
-	ft_printf("pa\n");
-}
-
-void	pb(t_stack **a, t_stack **b)
-{
-	push(a, b);
-	ft_printf("pb\n");
+	if (rotate(b))
+		ft_printf("rb\n");
 }
